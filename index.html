@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Лабораторная №4</title>
+</head>
+
+<body>
+    <form enctype="multipart/form-data" method="post">
+        <header>
+            <h1>Бронирование номера в гостинице</h1>
+            <hr />
+        </header>
+
+        <div class="form__body">
+            <div class="form__col">
+                <div class="form__group">
+                    <label for="first-name">Имя</label><br />
+                    <input type="text" name="first-name" id="first-name" class="form__control" />
+                </div>
+
+                <div class="form__group">
+                    <label for="phone-number">Номер для связи</label><br />
+                    <input type="text" name="phone-number" id="phone-number" placeholder="+7(000)000-00-00"
+                        pattern="+7([0-9]{3})[0-9]{3}-[0-9]{2}-[0-9]{2}" class="form__control" />
+                </div>
+
+                <div class="form__group">
+                    <label for="in-date">Дата заезда</label><br />
+                    <input type="date" name="in-date" id="in-date" class="form__control" />
+                </div>
+            </div>
+
+            <div class="form__col">
+                <div class="form__group">
+                    <label for="last-name">Фамилия</label><br />
+                    <input type="text" name="last-name" id="last-name" class="form__control" />
+                </div>
+
+                <div class="form__group">
+                    <label for="email">Почта для связи</label><br />
+                    <input type="email" name="email" id="email" placeholder="youremail@mail.ru" class="form__control" />
+                </div>
+
+                <div class="form__group">
+                    <label for="out-date">Дата выезда</label><br />
+                    <input type="date" name="out-date" id="out-date" class="form__control" />
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                var InDayMin = new Date();
+                var dd = InDayMin.getDate() + 1;
+                var mm = InDayMin.getMonth() + 1;
+                var yyyy = InDayMin.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+                InDayMin = yyyy + '-' + mm + '-' + dd;
+                document.getElementById("in-date").setAttribute("min", InDayMin);
+
+                var OutDayMin = new Date();
+                var dd = OutDayMin.getDate() + 2;
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+                OutDayMin = yyyy + '-' + mm + '-' + dd;
+                document.getElementById("out-date").setAttribute("min", OutDayMin);
+
+                var InDayMax = new Date();
+                var dd = InDayMax.getDate() + 1;
+                var mm = InDayMax.getMonth() + 5;
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+                InDayMax = yyyy + '-' + mm + '-' + dd;
+                document.getElementById("in-date").setAttribute("max", InDayMax);
+
+                var OutDayMax = new Date();
+                var dd = OutDayMax.getDate() + 2;
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+                OutDayMax = yyyy + '-' + mm + '-' + dd;
+                document.getElementById("out-date").setAttribute("max", OutDayMax);
+            </script>
+
+            <div class="form__col">
+                <div class="form__group">
+                    <label for="guests">Количество гостей</label><br />
+                    <input type="number" name="guests" id="guests" min="1" max="5" class="form__control" />
+                </div>
+
+                <div class="form__group">
+                    <label for="room-type">Тип номера</label><br />
+                    <select name="room-type" id="room-type" class="form__select">
+                        <option value="Эконом">Эконом</option>
+                        <option value="Стандарт">Стандарт</option>
+                        <option value="Комфорт">Комфорт</option>
+                        <option value="Люкс">Люкс</option>
+                    </select>
+                </div>
+
+                <div class="form__group">
+                    <label for="document">Документ, подтверждающий личность</label><br />
+                    <input type="file" name="document" id="document" accept="image/jpeg,image/png" class="form__file" />
+
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <hr />
+            <div class="form__checkbox">
+                <input type="checkbox" name="children" id="children" />
+                <label for="children" class="form__checkbox--label">Среди гостей присутствуют дети до 3-х лет</label>
+            </div><br />
+            <div class="form__checkbox">
+                <input type="checkbox" name="add-services" id="add-services" />
+                <label for="add-services" class="form__checkbox--label">Включить доп. услуги в стоимость номера</label>
+            </div><br />
+            <div class="form__checkbox">
+                <input type="checkbox" name="separate-bathroom" id="separate-bathroom" />
+                <label for="separate-bathroom" class="form__checkbox--label">Раздельный санузел</label>
+            </div>
+
+            <div class="form__botton">
+                <button type="reset" class="form__reset">
+                    Отчистить
+                </button>
+
+                <button type="submit" class="form__submit">
+                    Отправить
+                </button>
+            </div>
+        </footer>
+    </form>
+</body>
+
+</html>
